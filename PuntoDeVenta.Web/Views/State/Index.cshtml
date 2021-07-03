@@ -1,0 +1,48 @@
+﻿@model IEnumerable<PuntoDeVenta.Common.Entities.cState>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row">
+    <div class="col">
+        <h1>State</h1>
+    </div>
+    <div class="col text-right">
+        <a asp-action="Create" class="btn btn-outline-success" style="border-radius: 60px;">Create New</a>
+    </div>
+</div>
+
+<br />
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-outline-warning text-uppercase" style="border-radius: 60px;">Edit</a>
+                    @Html.ActionLink("Details", "Details", new { id = item.id }, new { @class = "btn btn-outline-secondary", @style = "border-radius: 60px;" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.id }, new { @class = "btn btn-outline-danger", @style = "border-radius: 60px;" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
