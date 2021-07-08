@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PuntoDeVenta.Web.DataBase;
 using PuntoDeVenta.Web.DataBase.Repositories;
+using PuntoDeVenta.Web.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,10 @@ namespace PuntoDeVenta.Web
             });
             services.AddScoped<IStateRepository, StateRepository>();
             services.AddScoped<IcStateService, cStateService>();
-            services.AddControllersWithViews();
+            services.AddScoped<IDapper, Dapperr>();
+            services.AddScoped<ICombosHelper, CombosHelper>();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +58,7 @@ namespace PuntoDeVenta.Web
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

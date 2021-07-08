@@ -1,0 +1,115 @@
+﻿@model IEnumerable<PuntoDeVenta.Common.Entities.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+
+<div class="row">
+    <div class="col">
+        <h1>Products</h1>
+    </div>
+    <div class="col text-right">
+        <a asp-action="Create" class="btn btn-outline-success" style="border-radius: 60px;">Create New</a>
+    </div>
+</div>
+
+<br />
+<table class="table table-hover table-responsive table-striped" id="MyTable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Costo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Existencia)
+            </th>
+            <th>
+                States
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Costo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Existencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cState.nombre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning text-uppercase" style="border-radius: 60px;">Edit</a>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-outline-secondary", @style = "border-radius: 60px;" })
+                    <a asp-action="Delete" class="btn btn-outline-danger" style="border-radius: 60px;" asp-route-id="@item.Id" id="btnDelete"><i class="glyphicon glyphicon-trash"></i> </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="deleteDialog" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-window-close"></i></button>
+                <h4 class="modal-title">Delete</h4>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to delete the Products?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" id="btnYesDelete">Delete</button>
+                <button type="button" class="btn btn-outline-success" id="btnNoDelete">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">$(document).ready(function () {
+
+            $('#MyTable').DataTable();
+
+            var id = 0;
+
+            $('a[id*=btnDelete]').click(function () {
+                debugger;
+                id = $(this).parent()[0].id;
+                $("#deleteDialog").modal('show');
+                return false;
+            });
+
+            $("#btnNoDelete").click(function () {
+                $("#deleteDialog").modal('hide');
+                return false;
+            });
+
+            $("#btnYesDelete").click(function () {
+                window.location.href = '/Product/Delete/' + id;
+            });
+
+        });</script>
+}

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<entrada>
+
+@{ ViewData["Title"] = "Index"; }
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<br />
+
+<div class="row">
+    <div class="col">
+        <h1>Entradas</h1>
+    </div>
+    <div class="col text-right">
+        <p>
+            <a asp-action="Create" class="btn btn-outline-primary" style="border-radius: 60px;"><i class="glyphicon glyphicon-plus"></i> Create New</a>
+        </p>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Enter</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover table-responsive table-striped" id="MyTable">
+                    <thead>
+                        <tr>
+                            @*@if (this.User.IsInRole("Admin"))
+                            {
+                            <th>
+                                @Html.DisplayNameFor(model => model.User.FullName)
+                            </th>}*@
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateEnterLocal)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Total)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Lines)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Quantity)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Value)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            @*@if (this.User.IsInRole("Admin"))
+                            {
+                            <th>
+                                @Html.DisplayFor(modelItem => item.User.FullName)
+                            </th>}*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateEnterLocal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Total)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Lines)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Value)
+                            </td>
+                            <td>
+                                <a asp-action="Deliver" asp-route-id="@item.Id" class="btn btn-outline-info" id="btnDeliver">Deliver</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" id="btnDelete">Delete</a>
+                            </td>
+                        </tr>}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script>$(document).ready(function () {
+            $('#MyTable').DataTable();
+        });</script>
+}

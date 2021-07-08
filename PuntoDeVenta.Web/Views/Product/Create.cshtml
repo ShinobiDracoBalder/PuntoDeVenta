@@ -1,0 +1,72 @@
+﻿@model AddProductViewModel
+@{
+    ViewData["Title"] = "CreateAsync";
+}
+
+<h1>CreateAsync</h1>
+
+<div class="container">
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="card text-center">
+            <div class="card-header">
+                Featured
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="idState" class="control-label"></label>
+                            <select asp-for="idState" asp-items="Model.ComboProdStates" class="form-control"></select>
+                            <span asp-validation-for="idState" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label"></label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Nombre" style="float: left;text-align: center;" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Fecha" class="control-label"></label>
+                            <input asp-for="Fecha" class="form-control" placeholder="Fecha" style="float: left;text-align: center;" />
+                            <span asp-validation-for="Fecha" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Precio" class="control-label"></label>
+                            <input asp-for="Precio" class="form-control" placeholder="Precio" style="float: left;text-align: center;" />
+                            <span asp-validation-for="Precio" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Costo" class="control-label"></label>
+                            <input asp-for="Costo" class="form-control" placeholder="Costo" style="float: left;text-align: center;" />
+                            <span asp-validation-for="Costo" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Existencia" class="control-label"></label>
+                            <input asp-for="Existencia" class="form-control" placeholder="Existencia" style="float: left;text-align: center;" />
+                            <span asp-validation-for="Existencia" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer  bg-transparent border-secondary text-muted">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-primary btn-block text-uppercase" style="border-radius: 60px;"> Guardar Registro</button>
+                    <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary btn-block text-uppercase" style="border-radius: 60px;"> Volver a la Lista</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
